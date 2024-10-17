@@ -7,6 +7,7 @@ import page3
 class PageTwo(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
+
         # tk.Frame.configure(self, bg="red")
         tk.Label(self, text="이벤트 진행 룰(Rule)", font=("Helvetica", 18, "bold")).pack(
             side="top", fill="x", pady=(30, 5)
