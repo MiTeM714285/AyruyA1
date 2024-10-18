@@ -18,14 +18,14 @@ class PageThree(tk.Frame):
             side="top", fill="x", pady=(30, 5)
         )
 
-        img_djmax_4b = tk.PhotoImage(file="image/djmax_4b.png").subsample(2)
-        img_djmax_5b = tk.PhotoImage(file="image/djmax_5b.png").subsample(2)
-        img_djmax_6b = tk.PhotoImage(file="image/djmax_6b.png").subsample(2)
-        img_djmax_8b = tk.PhotoImage(file="image/djmax_8b.png").subsample(2)
-        img_ez2on_4b = tk.PhotoImage(file="image/ez2on_4b.png").subsample(2)
-        img_ez2on_5b = tk.PhotoImage(file="image/ez2on_5b.png").subsample(2)
-        img_ez2on_6b = tk.PhotoImage(file="image/ez2on_6b.png").subsample(2)
-        img_ez2on_8b = tk.PhotoImage(file="image/ez2on_8b.png").subsample(2)
+        img_djmax_4b = tk.PhotoImage(file="image/djmax-4.png").subsample(2)
+        img_djmax_5b = tk.PhotoImage(file="image/djmax-5.png").subsample(2)
+        img_djmax_6b = tk.PhotoImage(file="image/djmax-6.png").subsample(2)
+        img_djmax_8b = tk.PhotoImage(file="image/djmax-8.png").subsample(2)
+        img_ez2on_4b = tk.PhotoImage(file="image/ez2on-4.png").subsample(2)
+        img_ez2on_5b = tk.PhotoImage(file="image/ez2on-5.png").subsample(2)
+        img_ez2on_6b = tk.PhotoImage(file="image/ez2on-6.png").subsample(2)
+        img_ez2on_8b = tk.PhotoImage(file="image/ez2on-8.png").subsample(2)
 
         gameAndKeymode = tk.StringVar()
 
