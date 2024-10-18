@@ -3,6 +3,10 @@ import tkinter as tk
 import main
 import page1
 import page3
+import page5
+import random
+
+from dbConnect import findLevelResult
 from switchFrame import switch_frame
 
 
@@ -18,15 +22,21 @@ class PageFour(tk.Frame):
         elif main.entry['gameAndKeymode'] == 'djmax-6':
             levelBoundary = "레벨 추첨 범위는 3.X ~ 12.X (V-ARCHIVE 기준) 입니다."
         elif main.entry['gameAndKeymode'] == 'djmax-8':
-            levelBoundary = "레벨 추첨 범위는 1.X ~ 9.X (V-ARCHIVE 기준) 입니다."
+            levelBoundary = "레벨 추첨 범위는 1.X ~ 10.X (V-ARCHIVE 기준) 입니다."
         elif main.entry['gameAndKeymode'] == 'ez2on-4':
-            levelBoundary = "레벨 추첨 범위는 12 ~ 19 입니다."
+            levelBoundary = "레벨 추첨 범위는 11 ~ 19 입니다."
         elif main.entry['gameAndKeymode'] == 'ez2on-5':
-            levelBoundary = "레벨 추첨 범위는 11 ~ 18 입니다."
+            levelBoundary = "레벨 추첨 범위는 10 ~ 18 입니다."
         elif main.entry['gameAndKeymode'] == 'ez2on-6':
-            levelBoundary = "레벨 추첨 범위는 11 ~ 18 입니다."
+            levelBoundary = "레벨 추첨 범위는 10 ~ 18 입니다."
         elif main.entry['gameAndKeymode'] == 'ez2on-8':
-            levelBoundary = "레벨 추첨 범위는 9 ~ 16 입니다."
+            levelBoundary = "레벨 추첨 범위는 8 ~ 16 입니다."
+
+        def randomLevel():
+            level = random.randrange(1, 10)
+            main.entry['level'] = level
+            levelResult = findLevelResult(main.entry['gameAndKeymode'], main.entry['level'])
+            levelResultText.config(text="결과:"+levelResult)
 
         # tk.Frame.configure(self, bg="red")
         fileUrl = "image/" + main.entry['gameAndKeymode'] + ".png"
@@ -49,14 +59,15 @@ class PageFour(tk.Frame):
             side="top", fill="x", pady=30
         )
 
-        tk.Label(self, text="결과:", font=("Helvetica", 18, "bold")).pack(
-            side="top", fill="x", pady=20
-        )
+        levelResultText = tk.Label(self, text="결과:", font=("Helvetica", 30, "bold"))
+        levelResultText.pack(side="top", fill="x", pady=20)
 
         tk.Button(
-            self, text="추첨 시작", font=("Helvetica", 24, "bold"), command=lambda: switch_frame(master, page1.PageOne)
-        ).pack()
+            self, text="추첨 시작", font=("Helvetica", 24, "bold"), command=lambda: randomLevel()).pack(pady=(0, 50))
 
         btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"),
                              command=lambda: switch_frame(master, page3.PageThree))
+        btn_next = tk.Button(self, text="다음", font=("Helvetica", 20, "bold"),
+                             command=lambda: switch_frame(master, page5.PageFive))
         btn_back.pack(side="left", padx=(280, 0))
+        btn_next.pack(side="right", padx=(0, 280))

@@ -9,6 +9,7 @@ entry = {
     'phone': '',
     'email': '',
     'gameAndKeymode': 'djmax-6',
+    'level': 0,
     'musicname': '',
     'difficulty': '',
     'playstyle': '',
