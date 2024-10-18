@@ -1,23 +1,32 @@
-from page0 import StartPage
 import tkinter as tk
 
+import page0
+from switchFrame import switch_frame
+
+entry = {
+    'name': '',
+    'phone': '',
+    'email': '',
+    'game': '',
+    'keymode': 0,
+    'musicname': '',
+    'difficulty': '',
+    'playstyle': '',
+    'condition1': 0,
+    'condition2': 0,
+    'condition3': 0
+}
 
 
 class SampleApp(tk.Tk):
+
     def __init__(self):
         tk.Tk.__init__(self)
         self.title("AyruyA의 리듬공방")
         self.geometry("1280x720")
-        self.resizable(False,False)
+        self.resizable(False, False)
         self._frame = None
-        self.switch_frame(StartPage)
-
-    def switch_frame(self, frame_class):
-        new_frame = frame_class(self)
-        if self._frame is not None:
-            self._frame.destroy()
-        self._frame = new_frame
-        self._frame.pack()
+        switch_frame(self, page0.StartPage)
 
 if __name__ == "__main__":
     app = SampleApp()

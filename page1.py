@@ -1,7 +1,10 @@
 import tkinter as tk
 
+import main
 import page0
 import page2
+from switchFrame import switch_frame
+
 
 class PageOne(tk.Frame):
     def __init__(self, master):
@@ -18,6 +21,18 @@ class PageOne(tk.Frame):
                 entry_name["state"] = tk.DISABLED
                 entry_phone["state"] = tk.DISABLED
                 entry_email["state"] = tk.DISABLED
+
+        def valueToEntry(name, phone, email):
+            main.entry['name'] = name
+            main.entry['phone'] = phone
+            main.entry['email'] = email
+            switch_frame(master, page2.PageTwo)
+
+        def emptyToEntry():
+            main.entry['name'] = ''
+            main.entry['phone'] = ''
+            main.entry['email'] = ''
+            switch_frame(master, page0.StartPage)
 
         # tk.Frame.configure(self, bg="blue")
         tk.Label(self, text="개인정보 이용 동의", font=("Helvetica", 18, "bold")).pack(
@@ -58,8 +73,8 @@ class PageOne(tk.Frame):
         lbl_email.pack()
         entry_email.pack(pady=(0,20))
 
-        btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"), command=lambda: master.switch_frame(page0.StartPage))
-        btn_next = tk.Button(self, text="다음", font=("Helvetica", 20, "bold"), command=lambda: master.switch_frame(page2.PageTwo))
+        btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"), command=lambda: emptyToEntry())
+        btn_next = tk.Button(self, text="다음", font=("Helvetica", 20, "bold"), command=lambda: valueToEntry(entry_name.get(), entry_phone.get(), entry_email.get()))
         btn_back.pack(side="left", padx=(280,0))
         btn_next.pack(side="right", padx=(0,280))
 

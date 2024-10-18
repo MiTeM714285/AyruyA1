@@ -2,6 +2,7 @@ import tkinter as tk
 
 import page1
 import page3
+from switchFrame import switch_frame
 
 
 class PageTwo(tk.Frame):
@@ -39,8 +40,8 @@ class PageTwo(tk.Frame):
         tk.Label.image = img_indicator
 
         btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"),
-                             command=lambda: master.switch_frame(page1.PageOne))
+                             command=lambda: switch_frame(master, page1.PageOne))
         btn_next = tk.Button(self, text="다음", font=("Helvetica", 20, "bold"),
-                             command=lambda: master.switch_frame(page3.PageThree))
+                             command=lambda: switch_frame(master, page3.PageThree))
         btn_back.pack(side="left", padx=(360, 0))
         btn_next.pack(side="right", padx=(0, 360))

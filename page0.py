@@ -1,7 +1,7 @@
 import tkinter as tk
 
 import page1
-import page2
+from switchFrame import switch_frame
 
 
 class StartPage(tk.Frame):
@@ -19,6 +19,6 @@ class StartPage(tk.Frame):
             side="top", fill="x", pady=30
         )
         tk.Button(
-            self, text="시작하기", font=("Helvetica", 24, "bold"), command=lambda: master.switch_frame(page1.PageOne)
+            self, text="시작하기", font=("Helvetica", 24, "bold"), command=lambda: switch_frame(master, page1.PageOne)
         ).pack()
         tk.Label(self, image=img_logo).pack(pady=25)
