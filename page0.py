@@ -1,6 +1,7 @@
 import tkinter as tk
 
 import page1
+from main import entry
 from switchFrame import switch_frame
 
 
@@ -22,3 +23,16 @@ class StartPage(tk.Frame):
             self, text="시작하기", font=("Helvetica", 24, "bold"), command=lambda: switch_frame(master, page1.PageOne)
         ).pack()
         tk.Label(self, image=img_logo).pack(pady=25)
+
+        # 초기 셋팅
+        entry['agree'] = False
+        entry['name'] = ''
+        entry['phone'] = ''
+        entry['email'] = ''
+        entry['gameAndKeymode'] = 'djmax-6'
+        entry['musicname'] = ''
+        entry['difficulty'] = ''
+        entry['playstyle'] = ''
+        entry['condition1'] = 0
+        entry['condition2'] = 0
+        entry['condition3'] = 0

@@ -9,32 +9,9 @@ from switchFrame import switch_frame
 class PageThree(tk.Frame):
     def __init__(self, master):
 
-        def valueToEntry():
-            if gameAndKeymode.get() == 0:
-                main.entry['game'] = 'djmax'
-                main.entry['keymode'] = 4
-            elif gameAndKeymode.get() == 1:
-                main.entry['game'] = 'djmax'
-                main.entry['keymode'] = 5
-            elif gameAndKeymode.get() == 2:
-                main.entry['game'] = 'djmax'
-                main.entry['keymode'] = 6
-            elif gameAndKeymode.get() == 3:
-                main.entry['game'] = 'djmax'
-                main.entry['keymode'] = 8
-            elif gameAndKeymode.get() == 4:
-                main.entry['game'] = 'ez2on'
-                main.entry['keymode'] = 4
-            elif gameAndKeymode.get() == 5:
-                main.entry['game'] = 'ez2on'
-                main.entry['keymode'] = 5
-            elif gameAndKeymode.get() == 6:
-                main.entry['game'] = 'ez2on'
-                main.entry['keymode'] = 6
-            elif gameAndKeymode.get() == 7:
-                main.entry['game'] = 'ez2on'
-                main.entry['keymode'] = 8
-            switch_frame(master, page4.PageFour)
+        def gameAndKeymode_rad():
+            print(gameAndKeymode.get())
+            main.entry['gameAndKeymode'] = gameAndKeymode.get()
 
         tk.Frame.__init__(self, master)
         tk.Label(self, text="게임 및 키모드 선택", font=("Helvetica", 18, "bold")).pack(
@@ -50,19 +27,21 @@ class PageThree(tk.Frame):
         img_ez2on_6b = tk.PhotoImage(file="image/ez2on_6b.png").subsample(2)
         img_ez2on_8b = tk.PhotoImage(file="image/ez2on_8b.png").subsample(2)
 
-        gameAndKeymode = tk.IntVar()
+        gameAndKeymode = tk.StringVar()
 
-        rad1 = tk.Radiobutton(self, image=img_djmax_4b, variable=gameAndKeymode, value=0)
-        rad2 = tk.Radiobutton(self, image=img_djmax_5b, variable=gameAndKeymode, value=1)
-        rad3 = tk.Radiobutton(self, image=img_djmax_6b, variable=gameAndKeymode, value=2)
-        rad4 = tk.Radiobutton(self, image=img_djmax_8b, variable=gameAndKeymode, value=3)
-        rad5 = tk.Radiobutton(self, image=img_ez2on_4b, variable=gameAndKeymode, value=4)
-        rad6 = tk.Radiobutton(self, image=img_ez2on_5b, variable=gameAndKeymode, value=5)
-        rad7 = tk.Radiobutton(self, image=img_ez2on_6b, variable=gameAndKeymode, value=6)
-        rad8 = tk.Radiobutton(self, image=img_ez2on_8b, variable=gameAndKeymode, value=7)
+        rad1 = tk.Radiobutton(self, image=img_djmax_4b, variable=gameAndKeymode, value="djmax-4", command=gameAndKeymode_rad)
+        rad2 = tk.Radiobutton(self, image=img_djmax_5b, variable=gameAndKeymode, value="djmax-5", command=gameAndKeymode_rad)
+        rad3 = tk.Radiobutton(self, image=img_djmax_6b, variable=gameAndKeymode, value="djmax-6", command=gameAndKeymode_rad)
+        rad4 = tk.Radiobutton(self, image=img_djmax_8b, variable=gameAndKeymode, value="djmax-8", command=gameAndKeymode_rad)
+        rad5 = tk.Radiobutton(self, image=img_ez2on_4b, variable=gameAndKeymode, value="ez2on-4", command=gameAndKeymode_rad)
+        rad6 = tk.Radiobutton(self, image=img_ez2on_5b, variable=gameAndKeymode, value="ez2on-5", command=gameAndKeymode_rad)
+        rad7 = tk.Radiobutton(self, image=img_ez2on_6b, variable=gameAndKeymode, value="ez2on-6", command=gameAndKeymode_rad)
+        rad8 = tk.Radiobutton(self, image=img_ez2on_8b, variable=gameAndKeymode, value="ez2on-8", command=gameAndKeymode_rad)
 
         tk.Label.image = img_djmax_4b, img_djmax_5b, img_djmax_6b, img_djmax_8b, img_ez2on_4b, img_ez2on_5b, img_ez2on_6b, img_ez2on_8b
-        rad3.select()
+
+
+
         rad1.pack()
         rad2.pack()
         rad3.pack()
@@ -89,6 +68,24 @@ class PageThree(tk.Frame):
         btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"),
                              command=lambda: switch_frame(master, page2.PageTwo))
         btn_next = tk.Button(self, text="다음", font=("Helvetica", 20, "bold"),
-                             command=lambda: valueToEntry())
+                             command=lambda: switch_frame(master, page4.PageFour))
         btn_back.pack(side="left", padx=(280, 0))
         btn_next.pack(side="right", padx=(0, 280))
+
+        # 초기 설정
+        if main.entry['gameAndKeymode'] == "djmax-4":
+            rad1.select()
+        elif main.entry['gameAndKeymode'] == "djmax-5":
+            rad2.select()
+        elif main.entry['gameAndKeymode'] == "djmax-6":
+            rad3.select()
+        elif main.entry['gameAndKeymode'] == "djmax-8":
+            rad4.select()
+        elif main.entry['gameAndKeymode'] == "ez2on-4":
+            rad5.select()
+        elif main.entry['gameAndKeymode'] == "ez2on-5":
+            rad6.select()
+        elif main.entry['gameAndKeymode'] == "ez2on-6":
+            rad7.select()
+        elif main.entry['gameAndKeymode'] == "ez2on-8":
+            rad8.select()

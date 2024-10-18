@@ -4,11 +4,11 @@ import page0
 from switchFrame import switch_frame
 
 entry = {
+    'agree': False,
     'name': '',
     'phone': '',
     'email': '',
-    'game': '',
-    'keymode': 0,
+    'gameAndKeymode': 'djmax-6',
     'musicname': '',
     'difficulty': '',
     'playstyle': '',

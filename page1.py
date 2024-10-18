@@ -1,38 +1,50 @@
 import tkinter as tk
+import tkinter.messagebox as msgbox
 
 import main
 import page0
 import page2
+import re
 from switchFrame import switch_frame
 
-
+email_pattern = re.compile(r'^[a-zA-Z0-9][a-zA-Z0-9._]+[@][a-zA-Z][A-Za-z.]+[.]\w{2,}')
+phone_pattern = re.compile(r"^\d{3}-\d{4}-\d{4}")
 class PageOne(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
 
         def agree_rad():
             if agree.get() == 0:
+                main.entry['agree'] = True
                 btn_next["state"] = tk.NORMAL
                 entry_name["state"] = tk.NORMAL
                 entry_phone["state"] = tk.NORMAL
                 entry_email["state"] = tk.NORMAL
             elif agree.get() == 1:
+                main.entry['agree'] = False
                 btn_next["state"] = tk.DISABLED
                 entry_name["state"] = tk.DISABLED
                 entry_phone["state"] = tk.DISABLED
                 entry_email["state"] = tk.DISABLED
 
         def valueToEntry(name, phone, email):
-            main.entry['name'] = name
-            main.entry['phone'] = phone
-            main.entry['email'] = email
-            switch_frame(master, page2.PageTwo)
+            if name == '' or name is None:
+                msgbox.showerror("오류", "성명을 입력해주세요.")
+            elif re.fullmatch(phone_pattern, phone) == None:
+                msgbox.showerror("오류", "전화번호 형식을 올바르게 입력해주세요.\n(XXX-XXXX-XXXX)")
+            elif re.fullmatch(email_pattern, email) == None:
+                msgbox.showerror("오류", "이메일 형식을 올바르게 입력해주세요.\n(abcd@email.com)")
+            else:
+                main.entry['name'] = name
+                main.entry['phone'] = phone
+                main.entry['email'] = email
+                switch_frame(master, page2.PageTwo)
 
-        def emptyToEntry():
-            main.entry['name'] = ''
-            main.entry['phone'] = ''
-            main.entry['email'] = ''
-            switch_frame(master, page0.StartPage)
+        def initializeEntry():
+            str = msgbox.askokcancel("알림","입력하신 정보들이 초기화됩니다. 계속하시겠습니까?")
+            if str:
+                switch_frame(master, page0.StartPage)
+
 
         # tk.Frame.configure(self, bg="blue")
         tk.Label(self, text="개인정보 이용 동의", font=("Helvetica", 18, "bold")).pack(
@@ -60,8 +72,8 @@ class PageOne(tk.Frame):
         rad2.pack(pady=(0,30))
 
         lbl_name = tk.Label(self, text="성명", font=("Helvetica", 14, "bold"))
-        lbl_phone = tk.Label(self, text="전화번호", font=("Helvetica", 14, "bold"))
-        lbl_email = tk.Label(self, text="이메일", font=("Helvetica", 14, "bold"))
+        lbl_phone = tk.Label(self, text="전화번호 (XXX-XXXX-XXXX)", font=("Helvetica", 14, "bold"))
+        lbl_email = tk.Label(self, text="이메일 (asdf@email.com)", font=("Helvetica", 14, "bold"))
         entry_name = tk.Entry(self, width=30, font=("Helvetica", 14, "bold"))
         entry_phone = tk.Entry(self, width=30, font=("Helvetica", 14, "bold"))
         entry_email = tk.Entry(self, width=30, font=("Helvetica", 14, "bold"))
@@ -73,14 +85,24 @@ class PageOne(tk.Frame):
         lbl_email.pack()
         entry_email.pack(pady=(0,20))
 
-        btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"), command=lambda: emptyToEntry())
+        btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"), command=lambda: initializeEntry())
         btn_next = tk.Button(self, text="다음", font=("Helvetica", 20, "bold"), command=lambda: valueToEntry(entry_name.get(), entry_phone.get(), entry_email.get()))
         btn_back.pack(side="left", padx=(280,0))
         btn_next.pack(side="right", padx=(0,280))
 
         # 초기 상태
-        rad2.select()
-        btn_next["state"] = tk.DISABLED
-        entry_name["state"] = tk.DISABLED
-        entry_phone["state"] = tk.DISABLED
-        entry_email["state"] = tk.DISABLED
+        if main.entry['agree']:
+            rad1.select()
+            btn_next["state"] = tk.NORMAL
+            entry_name["state"] = tk.NORMAL
+            entry_phone["state"] = tk.NORMAL
+            entry_email["state"] = tk.NORMAL
+        else:
+            rad2.select()
+            btn_next["state"] = tk.DISABLED
+            entry_name["state"] = tk.DISABLED
+            entry_phone["state"] = tk.DISABLED
+            entry_email["state"] = tk.DISABLED
+        entry_name.insert(tk.END, main.entry['name'])
+        entry_phone.insert(tk.END, main.entry['phone'])
+        entry_email.insert(tk.END, main.entry['email'])
