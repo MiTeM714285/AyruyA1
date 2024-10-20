@@ -73,6 +73,16 @@ class PageThree(tk.Frame):
         btn_next.pack(side="right", padx=(0, 280))
 
         # 초기 설정
+        if main.entry['level'] != 0:
+            rad1['state'] = tk.DISABLED
+            rad2['state'] = tk.DISABLED
+            rad3['state'] = tk.DISABLED
+            rad4['state'] = tk.DISABLED
+            rad5['state'] = tk.DISABLED
+            rad6['state'] = tk.DISABLED
+            rad7['state'] = tk.DISABLED
+            rad8['state'] = tk.DISABLED
+
         if main.entry['gameAndKeymode'] == "djmax-4":
             rad1.select()
         elif main.entry['gameAndKeymode'] == "djmax-5":

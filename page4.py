@@ -1,7 +1,6 @@
 import tkinter as tk
 
 import main
-import page1
 import page3
 import page5
 import random
@@ -33,6 +32,7 @@ class PageFour(tk.Frame):
             levelBoundary = "레벨 추첨 범위는 8 ~ 16 입니다."
 
         def randomLevel():
+            levelButton["state"] = tk.DISABLED
             level = random.randrange(1, 10)
             main.entry['level'] = level
             levelResult = findLevelResult(main.entry['gameAndKeymode'], main.entry['level'])
@@ -62,8 +62,8 @@ class PageFour(tk.Frame):
         levelResultText = tk.Label(self, text="결과:", font=("Helvetica", 30, "bold"))
         levelResultText.pack(side="top", fill="x", pady=20)
 
-        tk.Button(
-            self, text="추첨 시작", font=("Helvetica", 24, "bold"), command=lambda: randomLevel()).pack(pady=(0, 50))
+        levelButton = tk.Button(self, text="추첨 시작", font=("Helvetica", 24, "bold"), command=lambda: randomLevel())
+        levelButton.pack(pady=(0, 50))
 
         btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"),
                              command=lambda: switch_frame(master, page3.PageThree))
@@ -71,3 +71,10 @@ class PageFour(tk.Frame):
                              command=lambda: switch_frame(master, page5.PageFive))
         btn_back.pack(side="left", padx=(280, 0))
         btn_next.pack(side="right", padx=(0, 280))
+
+        # 초기 셋팅
+        if main.entry['level'] != 0:
+            levelButton['state'] = tk.DISABLED
+
+        levelResult = findLevelResult(main.entry['gameAndKeymode'], main.entry['level'])
+        levelResultText.config(text="결과:" + levelResult)

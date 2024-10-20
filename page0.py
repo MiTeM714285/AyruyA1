@@ -29,10 +29,3 @@ class StartPage(tk.Frame):
         entry['name'] = ''
         entry['phone'] = ''
         entry['email'] = ''
-        entry['gameAndKeymode'] = 'djmax-6'
-        entry['musicname'] = ''
-        entry['difficulty'] = ''
-        entry['playstyle'] = ''
-        entry['condition1'] = 0
-        entry['condition2'] = 0
-        entry['condition3'] = 0
