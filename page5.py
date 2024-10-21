@@ -45,7 +45,7 @@ class PageFive(tk.Frame):
         tk.Label(self,
                  text="주의:추첨 시작 버튼은 한 번만 유효하며, 다시는 되돌이킬 수 없습니다.",
                  font=("Helvetica", 18, "bold"), fg="red").pack(
-            side="top", fill="x", pady=30
+            side="top", fill="x", pady=20
         )
 
         musicResultText = tk.Label(self, text="결과:", font=("Helvetica", 30, "bold"))
