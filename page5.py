@@ -52,7 +52,7 @@ class PageFive(tk.Frame):
         musicResultText.pack(side="top", fill="x", pady=20)
 
         musicButton = tk.Button(self, text="추첨 시작", font=("Helvetica", 24, "bold"), command=lambda: randomMusicAndDifficulty())
-        musicButton.pack(pady=(0, 50))
+        musicButton.pack(pady=(0, 20))
 
         btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"),
                              command=lambda: switch_frame(master, page4.PageFour))
