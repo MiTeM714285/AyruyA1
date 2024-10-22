@@ -1,21 +1,45 @@
+import threading
 import tkinter as tk
-
-import main
 import keyboard
+import main
 import time
+import tkinter.messagebox as msgbox
 from PIL import ImageGrab
-
+import random
+import page0
+from switchFrame import switch_frame
 
 class PageSeven(tk.Frame):
     def __init__(self, master):
         global gameAndKeymode
         tk.Frame.__init__(self, master)
 
-        def screenshot():
-            # 2020년 6월 1일 10시 20분 30초 -> _20200601_102030
-            curr_time = time.strftime("_%Y%m%d_%H%M%S")
-            img = ImageGrab.grab()
-            img.save("image{}.png".format(curr_time))  # image_20200601_102030 .png
+        condition1 = str(random.randrange(1, 12))
+        condition2 = str(random.randrange(1, 12))
+        condition3 = str(random.randrange(1, 12))
+        str_condition1 = str(condition1)
+        str_condition2 = str(condition2)
+        str_condition3 = str(condition3)
+        main.entry['condition1'] = condition1
+        main.entry['condition2'] = condition2
+        main.entry['condition3'] = condition3
+
+        def start_keyboard_listener():
+            keyboard.on_press(on_key_event)
+            keyboard.wait()  #
+
+        def on_key_event(event):
+            if event.name == '0':
+                curr_time = time.strftime("%Y%m%d-%H%M%S")
+                img = ImageGrab.grab()
+                img.save(main.entry['name'] + "_" + main.entry['phone'] + "_" + main.entry['email'] + "_" + "{}.png".format(curr_time))
+                main.entry['condition1'] = condition1
+                main.entry['condition2'] = condition2
+                main.entry['condition3'] = condition3
+                message = "성과 제출이 완료되었습니다.\n적용 조건번호는 다음과 같습니다.\n" + str_condition1 + ", " + str_condition2 + ", " + str_condition3 + "\n자세한 사항은 이벤트 공지를 참조해 주세요.\n이벤트가 종료되었습니다. 감사합니다."
+                str = msgbox.showinfo("알림", message)
+                if str:
+                    master.destroy()
 
         tk.Label(self, text="이벤트 진행을 위한 준비가 모두 끝났습니다.\n다음을 진행해 주세요.", font=("Helvetica", 20, "bold")).pack(
             side="top", fill="x", pady=(20, 5)
@@ -74,7 +98,5 @@ class PageSeven(tk.Frame):
             side="top", fill="x", pady=(15)
         )
 
-        while True:
-            if keyboard.is_pressed("p"):
-                screenshot()
-                break
+        listener_thread = threading.Thread(target=start_keyboard_listener, daemon=True)
+        listener_thread.start()
