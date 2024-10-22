@@ -1,8 +1,10 @@
 import tkinter as tk
 import main
+import page1
 import page5
 import page7
 import random
+import tkinter.messagebox as msgbox
 from switchFrame import switch_frame
 
 
@@ -12,6 +14,7 @@ class PageSix(tk.Frame):
 
         def randomStyle():
             styleButton["state"] = tk.DISABLED
+            btn_next['state'] = tk.NORMAL
             styleIndex = random.randrange(1, 6)
             if styleIndex == 1:
                 styleResult = "FREE"
@@ -26,6 +29,13 @@ class PageSix(tk.Frame):
 
             main.entry['playstyle'] = styleResult
             styleResultText.config(text="결과:"+styleResult)
+
+        def confirmInfo():
+            str = msgbox.askyesno("알림", "이벤트 준비를 거의 마쳤습니다.\n다음 입력하신 개인정보가 확실합니까?\n이름 : " + main.entry['name'] + "\n전화번호 : " + main.entry['phone'] + "\n이메일 : " + main.entry['email'])
+            if str:
+                switch_frame(master, page7.PageSeven)
+            else:
+                switch_frame(master, page1.PageOne)
 
         fileUrl = "image/" + main.entry['gameAndKeymode'] + ".png"
         img_gameAndKeymode = tk.PhotoImage(file=fileUrl).subsample(2)
@@ -67,12 +77,16 @@ class PageSix(tk.Frame):
         btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"),
                              command=lambda: switch_frame(master, page5.PageFive))
         btn_next = tk.Button(self, text="다음", font=("Helvetica", 20, "bold"),
-                             command=lambda: switch_frame(master, page7.PageSeven))
+                             command=lambda: confirmInfo())
         btn_back.pack(side="left", padx=(280, 0))
         btn_next.pack(side="right", padx=(0, 280))
 
         # 초기 셋팅
         if main.entry['playstyle'] != '':
             styleButton['state'] = tk.DISABLED
+            btn_next['state'] = tk.NORMAL
+        else:
+            styleButton['state'] = tk.NORMAL
+            btn_next['state'] = tk.DISABLED
 
         styleResultText.config(text="결과:" + main.entry['playstyle'])

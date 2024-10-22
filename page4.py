@@ -33,6 +33,7 @@ class PageFour(tk.Frame):
 
         def randomLevel():
             levelButton["state"] = tk.DISABLED
+            btn_next['state'] = tk.NORMAL
             level = random.randrange(1, 10)
             main.entry['level'] = level
             levelResult = findLevelResult(main.entry['gameAndKeymode'], main.entry['level'])
@@ -75,6 +76,10 @@ class PageFour(tk.Frame):
         # 초기 셋팅
         if main.entry['level'] != 0:
             levelButton['state'] = tk.DISABLED
+            btn_next['state'] = tk.NORMAL
+        else:
+            levelButton['state'] = tk.NORMAL
+            btn_next['state'] = tk.DISABLED
 
         levelResult = findLevelResult(main.entry['gameAndKeymode'], main.entry['level'])
         levelResultText.config(text="결과:" + levelResult)

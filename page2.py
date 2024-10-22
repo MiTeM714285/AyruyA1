@@ -22,22 +22,15 @@ class PageTwo(tk.Frame):
                  font=("Helvetica", 12, "normal")).pack(
             side="top", fill="x", pady=5
         )
-        tk.Label(self, text="DJMAX RESPECT V",font=("Helvetica", 16, "bold")).pack(side="top", fill="x", pady=5)
-        tk.Label(self,
-                 text="1. 피버를 사용하지 않습니다.",
-                 font=("Helvetica", 12, "normal")).pack(
-            side="top", fill="x", pady=5
-        )
         tk.Label(self, text="EZ2ON REBOOT:R", font=("Helvetica", 16, "bold")).pack(side="top", fill="x", pady=5)
         tk.Label(self,
-                 text="1. BASIC 판정모드로 진행합니다.\n\n"
-                      "2. 판정 계기판은 텍스트 모드는 사용 가능하나, 인디케이터 모드 및 둘 다는 사용할 수 없습니다.",
+                 text="BASIC 판정모드로 진행합니다.\n",
                  font=("Helvetica", 12, "normal")).pack(
-            side="top", fill="x", pady=5
+            side="top", fill="x", pady=(5,20)
         )
-        img_indicator = tk.PhotoImage(file="image/indicator.png")
-        tk.Label(self, image=img_indicator).pack(pady=(0,30))
-        tk.Label.image = img_indicator
+        # img_indicator = tk.PhotoImage(file="image/indicator.png")
+        # tk.Label(self, image=img_indicator).pack(pady=(0,30))
+        # tk.Label.image = img_indicator
 
         btn_back = tk.Button(self, text="뒤로", font=("Helvetica", 20, "bold"),
                              command=lambda: switch_frame(master, page1.PageOne))

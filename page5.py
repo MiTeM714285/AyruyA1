@@ -15,6 +15,7 @@ class PageFive(tk.Frame):
 
         def randomMusicAndDifficulty():
             musicButton["state"] = tk.DISABLED
+            btn_next['state'] = tk.NORMAL
             musicAndDifficultyIndex = random.randrange(0, 3)
             main.entry['musicname'] = musicAndDifficulty[musicAndDifficultyIndex][0]
             main.entry['difficulty'] = musicAndDifficulty[musicAndDifficultyIndex][1]
@@ -69,8 +70,11 @@ class PageFive(tk.Frame):
 
         if main.entry['musicname'] != '':
             musicButton['state'] = tk.DISABLED
+            btn_next['state'] = tk.NORMAL
             musicResultText.config(text="결과:" + main.entry['musicname'] + " [" + main.entry['difficulty'] + "]")
         else:
+            musicButton['state'] = tk.NORMAL
+            btn_next['state'] = tk.DISABLED
             musicResultText.config(text="결과:")
 
 
