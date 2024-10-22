@@ -1,6 +1,9 @@
 import tkinter as tk
 
 import main
+import keyboard
+import time
+from PIL import ImageGrab
 
 
 class PageSeven(tk.Frame):
@@ -8,12 +11,19 @@ class PageSeven(tk.Frame):
         global gameAndKeymode
         tk.Frame.__init__(self, master)
 
+        def screenshot():
+            # 2020년 6월 1일 10시 20분 30초 -> _20200601_102030
+            curr_time = time.strftime("_%Y%m%d_%H%M%S")
+            img = ImageGrab.grab()
+            img.save("image{}.png".format(curr_time))  # image_20200601_102030 .png
+
         tk.Label(self, text="이벤트 진행을 위한 준비가 모두 끝났습니다.\n다음을 진행해 주세요.", font=("Helvetica", 20, "bold")).pack(
             side="top", fill="x", pady=(20, 5)
         )
 
-        tk.Label(self, text="1. alt+tab을 눌러 자신에 해당하는 게임으로 화면 전환 후 아래와 같은 조건으로 플레이", font=("Helvetica", 18, "bold")).pack(
-            side="top", fill="x", pady=(15,5)
+        tk.Label(self, text="1. alt+tab을 눌러 자신에 해당하는 게임으로 화면 전환 후 아래와 같은 조건으로 플레이",
+                 font=("Helvetica", 18, "bold")).pack(
+            side="top", fill="x", pady=(15, 5)
         )
 
         tk.Label(self, text="아래와 같은 조건으로 플레이하지 않을 시, 실격 처리될 수 있습니다.",
@@ -43,18 +53,19 @@ class PageSeven(tk.Frame):
         playstyle = main.entry['playstyle']
 
         tk.Label(self, text="게임 및 모드 : " + gameAndKeymode + "\n"
-                "과제곡 및 난이도 : " + musicname + " [" + difficulty + "]\n"
-                "노트 배치 옵션 : " + playstyle, font=("Helvetica", 14, "normal")).pack(
+                                                            "과제곡 및 난이도 : " + musicname + " [" + difficulty + "]\n"
+                                                                                                             "노트 배치 옵션 : " + playstyle,
+                 font=("Helvetica", 14, "normal")).pack(
             side="top", fill="x", pady=(5, 5))
 
         tk.Label(self, text="이외 노트 스타일 및 키설정 등 기타 옵션은 자유로 설정할 수 있습니다.",
                  font=("Helvetica", 14, "bold")).pack(
-            side="top", fill="x", pady=(5,25)
+            side="top", fill="x", pady=(5, 25)
         )
 
         tk.Label(self, text="2. 리절트 화면이 뜨면 키보드 0번을 눌러 자신의 성과 제출하기",
                  font=("Helvetica", 18, "bold")).pack(
-            side="top", fill="x", pady=(15,5)
+            side="top", fill="x", pady=(15, 5)
         )
 
         tk.Label(self, text="리절트 화면에서 무심코 넘어가기 버튼을 눌러 성과를 제출하지 못하는 불상사가 없도록 합니다.\n"
@@ -62,3 +73,8 @@ class PageSeven(tk.Frame):
                  font=("Helvetica", 20, "bold"), fg="red").pack(
             side="top", fill="x", pady=(15)
         )
+
+        while True:
+            if keyboard.is_pressed("p"):
+                screenshot()
+                break
