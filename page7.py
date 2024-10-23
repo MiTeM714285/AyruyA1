@@ -14,9 +14,10 @@ class PageSeven(tk.Frame):
         global gameAndKeymode
         tk.Frame.__init__(self, master)
 
-        condition1 = str(random.randrange(1, 12))
-        condition2 = str(random.randrange(1, 12))
-        condition3 = str(random.randrange(1, 12))
+        conditions = random.sample(range(1,12),3)
+        condition1 = conditions[0]
+        condition2 = conditions[1]
+        condition3 = conditions[2]
         str_condition1 = str(condition1)
         str_condition2 = str(condition2)
         str_condition3 = str(condition3)
