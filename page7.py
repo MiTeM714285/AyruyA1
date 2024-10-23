@@ -1,13 +1,14 @@
+import sqlite3
 import threading
 import tkinter as tk
 import keyboard
+
+from dbConnect import insertInfo
 import main
 import time
 import tkinter.messagebox as msgbox
 from PIL import ImageGrab
 import random
-import page0
-from switchFrame import switch_frame
 
 class PageSeven(tk.Frame):
     def __init__(self, master):
@@ -37,6 +38,10 @@ class PageSeven(tk.Frame):
                 main.entry['condition1'] = condition1
                 main.entry['condition2'] = condition2
                 main.entry['condition3'] = condition3
+                try:
+                    insertInfo(main.entry['name'], main.entry['phone'], main.entry['email'], main.entry['gameAndKeymode'], main.entry['musicname'], main.entry['difficulty'], main.entry['playstyle'], main.entry['condition1'], main.entry['condition2'], main.entry['condition3'])
+                except sqlite3.Error:
+                    msgbox.showerror("오류", "데이터베이스 오류가 발생하였습니다")
                 message = "성과 제출이 완료되었습니다.\n적용 조건번호는 다음과 같습니다.\n" + str_condition1 + ", " + str_condition2 + ", " + str_condition3 + "\n자세한 사항은 이벤트 공지를 참조해 주세요.\n이벤트가 종료되었습니다. 감사합니다."
                 str = msgbox.showinfo("알림", message)
                 if str:

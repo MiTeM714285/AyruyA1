@@ -1,16 +1,18 @@
+import sqlite3
 import tkinter as tk
 
 import main
 import page4
 import page6
 import random
-
+import tkinter.messagebox as msgbox
 from dbConnect import findMusicAndDifficulty
 from switchFrame import switch_frame
 
 
 class PageFive(tk.Frame):
     def __init__(self, master):
+        global musicAndDifficulty
         tk.Frame.__init__(self, master)
 
         def randomMusicAndDifficulty():
@@ -63,7 +65,10 @@ class PageFive(tk.Frame):
         btn_next.pack(side="right", padx=(0, 280))
 
         # 초기 셋팅
-        musicAndDifficulty = findMusicAndDifficulty(main.entry['gameAndKeymode'], main.entry['level'])
+        try:
+            musicAndDifficulty = findMusicAndDifficulty(main.entry['gameAndKeymode'], main.entry['level'])
+        except sqlite3.Error:
+            msgbox.showerror("오류", "데이터베이스 오류가 발생하였습니다.")
         music1.config(text=musicAndDifficulty[0][0] + " [" + musicAndDifficulty[0][1] + "]")
         music2.config(text=musicAndDifficulty[1][0] + " [" + musicAndDifficulty[1][1] + "]")
         music3.config(text=musicAndDifficulty[2][0] + " [" + musicAndDifficulty[2][1] + "]")

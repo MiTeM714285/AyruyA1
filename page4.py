@@ -1,10 +1,11 @@
+import sqlite3
 import tkinter as tk
 
 import main
 import page3
 import page5
 import random
-
+import tkinter.messagebox as msgbox
 from dbConnect import findLevelResult
 from switchFrame import switch_frame
 
@@ -36,7 +37,10 @@ class PageFour(tk.Frame):
             btn_next['state'] = tk.NORMAL
             level = random.randrange(1, 10)
             main.entry['level'] = level
-            levelResult = findLevelResult(main.entry['gameAndKeymode'], main.entry['level'])
+            try:
+                levelResult = findLevelResult(main.entry['gameAndKeymode'], main.entry['level'])
+            except sqlite3.Error:
+                msgbox.showerror("오류", "데이터베이스 오류가 발생하였습니다.")
             levelResultText.config(text="결과:"+levelResult)
 
         # tk.Frame.configure(self, bg="red")
