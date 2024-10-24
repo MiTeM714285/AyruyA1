@@ -51,7 +51,7 @@ class PageSeven(tk.Frame):
             side="top", fill="x", pady=(20, 5)
         )
 
-        tk.Label(self, text="1. alt+tab을 눌러 자신에 해당하는 게임으로 화면 전환 후 아래와 같은 조건으로 플레이",
+        tk.Label(self, text="1. 자신이 선택한 게임을 아래와 같은 조건으로 플레이",
                  font=("Helvetica", 18, "bold")).pack(
             side="top", fill="x", pady=(15, 5)
         )
@@ -102,6 +102,11 @@ class PageSeven(tk.Frame):
                             "성과 제출을 하지 않으면 실격 처리 됩니다.",
                  font=("Helvetica", 20, "bold"), fg="red").pack(
             side="top", fill="x", pady=(15)
+        )
+
+        tk.Label(self, text="모두 읽었다면, alt+tab을 눌러 자신이 선택한 게임으로 이동 후 게임을 진행합니다.",
+                 font=("Helvetica", 25, "bold"), fg="blue").pack(
+            side="top", fill="x", pady=(30)
         )
 
         listener_thread = threading.Thread(target=start_keyboard_listener, daemon=True)
