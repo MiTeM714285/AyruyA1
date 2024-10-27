@@ -48,6 +48,7 @@ if __name__ == "__main__":
     app = SampleApp()
     app.attributes('-topmost', True)
     app.protocol('WM_DELETE_WINDOW', exit_window)
+    app.iconbitmap('image/icon.ico')
     listener_thread = threading.Thread(target=start_keyboard_listener, daemon=True)
     listener_thread.start()
     app.mainloop()
