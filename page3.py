@@ -10,7 +10,6 @@ class PageThree(tk.Frame):
     def __init__(self, master):
 
         def gameAndKeymode_rad():
-            print(gameAndKeymode.get())
             main.entry['gameAndKeymode'] = gameAndKeymode.get()
 
         tk.Frame.__init__(self, master)
