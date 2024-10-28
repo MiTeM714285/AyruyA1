@@ -33,6 +33,7 @@ class PageFour(tk.Frame):
             levelBoundary = "레벨 추첨 범위는 8 ~ 16 입니다."
 
         def randomLevel():
+            global levelResult
             levelButton["state"] = tk.DISABLED
             btn_next['state'] = tk.NORMAL
             level = random.randrange(1, 10)
