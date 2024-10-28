@@ -34,7 +34,7 @@ class PageSeven(tk.Frame):
             if event.name == '0':
                 curr_time = time.strftime("%Y%m%d-%H%M%S")
                 img = ImageGrab.grab()
-                img.save(main.entry['name'] + "_" + main.entry['phone'] + "_" + main.entry['email'] + "_" + "{}.png".format(curr_time))
+                img.save("screenshot/" + main.entry['name'] + "_" + main.entry['phone'] + "_" + main.entry['email'] + "_" + "{}.png".format(curr_time))
                 main.entry['condition1'] = condition1
                 main.entry['condition2'] = condition2
                 main.entry['condition3'] = condition3
